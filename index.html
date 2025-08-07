@@ -267,11 +267,16 @@ function resetHint() {
 			_element = inputs[i]; // N番目（0が先頭）
 			_element.removeAttribute("disabled");
 			_element.style.backgroundColor = "#ff9";
+			_element.value = "";
 		}
 	}
 }
 //サブネットマスクと各アドレスの変化する部分のみを「-」として挿入
-function insertHint() {
+function insertHint(_isAutoset) {
+	if (_isAutoset == false) {
+		resetHint();
+		return;
+	}
 	let _element;
 	let _splitBase = addressObj["baseAddress"].split(".");
 	_splitBase[_splitBase.length-1] = _splitBase[_splitBase.length-1].split("/")[0];
@@ -541,7 +546,7 @@ function loadHistory() {
 </form>
 <p id="subbtn">
 <label><input type="checkbox" id="check_alwayanswer" value="" onclick="insertAnswer(getAnswer(true))">正解を常に表示</label>
-　<label><input type="checkbox" id="check_semiauto" value="" onclick="insertHint()">対象以外を自動入力</label>
+　<label><input type="checkbox" id="check_semiauto" value="" onclick="insertHint(this.checked)">対象以外を自動入力</label>
 　経過時間：<span id="timer"></span>秒
 </p>
 <p id="answer"></p>
