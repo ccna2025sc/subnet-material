@@ -265,7 +265,8 @@ function resetHint() {
 		//console.log(key,inputs);
 		for (let i = 0; i < 4; i++) {
 			_element = inputs[i]; // N番目（0が先頭）
-			_element.style.backgroundColor = "transparent";	
+			_element.removeAttribute("disabled");
+			_element.style.backgroundColor = "#ff9";
 		}
 	}
 }
@@ -348,15 +349,20 @@ function getScore() {
 			}
 		}
 	}
-	//経過時間は仮で60秒、120秒、180秒
+	//経過時間ボーナスは通常時は60秒。手抜きは120秒
+	let _baseSec = 60;
+	let isChecked = document.getElementById("check_semiauto").checked;
+	if (isChecked == true) {
+		_baseSec = _baseSec * 0.5;
+	}
 	if (_score >= 25 * 3) {
-		if (milliSec <= 60*1000) {
+		if (milliSec <= _baseSec*1000) {
 			_score += 25;			
 		}
-		else if (milliSec <= 120*1000) {
+		else if (milliSec <= _baseSec*2*1000) {
 				_score += 15;			
 		}
-		else if (milliSec <= 180*1000) {
+		else if (milliSec <= _baseSec*3*1000) {
 				_score += 5;
 		}
 	}
