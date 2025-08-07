@@ -81,6 +81,8 @@ let milliSec = 0;
 let interval = 100;
 let passTimer;
 let scoreArray = [[]];
+let BASE_OK_SCORE = 25;
+let BASE_TIME_SEC = 60;
 
 //-----------------------------
 
@@ -350,26 +352,38 @@ function getScore() {
 			}
 			//console.log(_valueStr+" vs "+addressObj[key]);
 			if (_valueStr == addressObj[key]) {
-				_score += 25;
+				_score += BASE_OK_SCORE;
 			}
 		}
 	}
 	//経過時間ボーナスは通常時は60秒。手抜きは120秒
-	let _baseSec = 60;
 	let isChecked = document.getElementById("check_semiauto").checked;
+	let _baseSec = BASE_TIME_SEC;
+	//let _baseSec = 60;
 	if (isChecked == true) {
-		_baseSec = _baseSec * 0.5;
+		_baseSec = BASE_TIME_SEC * 0.5;
 	}
-	if (_score >= 25 * 3) {
-		if (milliSec <= _baseSec*1000) {
+	let _timeScore = 100 - BASE_OK_SCORE * 3;
+	if (_score >= BASE_OK_SCORE * 3) {
+		if (milliSec <= _baseSec*1*1000) {
 			_score += 25;			
 		}
-		else if (milliSec <= _baseSec*2*1000) {
-				_score += 15;			
+		else if (milliSec <= _baseSec*1.5*1000) {
+				_score += 20;			
 		}
-		else if (milliSec <= _baseSec*3*1000) {
+		else if (milliSec <= _baseSec*2.0*1000) {
+				_score += 15;
+		}
+		else if (milliSec <= _baseSec*2.5*1000) {
+				_score += 10;
+		}
+		else if (milliSec <= _baseSec*3.0*1000) {
 				_score += 5;
 		}
+		/*
+		_score += (_timeScore + 1 - parseInt(_timeScore * milliSec / (_baseSec * 1000)));
+		_score = Math.min(parseInt(_score),100);
+		*/
 	}
 	return _score;
 }
