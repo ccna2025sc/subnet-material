@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
 <meta name="robots" content="noindex">
+<title>subnet</title>
 <style>
 html {
   box-sizing: border-box;
@@ -208,7 +209,7 @@ function getSubnetInfo(keystr,cidr) {
 function setQandA() {
 	let _element = document.getElementById("question");
 	let _num = rnd(33);
-	let _txt = "サブネットマスク(SUB)、ネットワークアドレス(NWA)、ブロードキャストアドレス(BCA)を求めなさい。";
+	let _txt = "ベースのアドレス(BASE)を元に、サブネットマスク(SUB)、ネットワークアドレス(NWA)、ブロードキャストアドレス(BCA)を求めなさい。";
 	_element.innerHTML = ""+_txt;
 	
 	//BASEにアドレスを挿入
