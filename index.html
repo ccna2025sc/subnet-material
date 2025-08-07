@@ -365,11 +365,12 @@ function getScore() {
 	}
 	let _timeScore = 100 - BASE_OK_SCORE * 3;
 	if (_score >= BASE_OK_SCORE * 3) {
+		//console.log(milliSec+" <= "+(_baseSec*1.5*1000));
 		if (milliSec <= _baseSec*1*1000) {
 			_score += 25;			
 		}
 		else if (milliSec <= _baseSec*1.5*1000) {
-				_score += 20;			
+				_score += 20;
 		}
 		else if (milliSec <= _baseSec*2.0*1000) {
 				_score += 15;
