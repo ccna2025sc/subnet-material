@@ -349,14 +349,16 @@ function getScore() {
 		}
 	}
 	//経過時間は仮で60秒、120秒、180秒
-	if (_score >= 90 && milliSec <= 60*1000) {
+	if (_score >= 25 * 3) {
+		if (milliSec <= 60*1000) {
 			_score += 25;			
-	}
-	else if (_score >= 90 && milliSec <= 120*1000) {
-			_score += 15;			
-	}
-	else if (_score >= 90 && milliSec <= 180*1000) {
-			_score += 5;
+		}
+		else if (milliSec <= 120*1000) {
+				_score += 15;			
+		}
+		else if (milliSec <= 180*1000) {
+				_score += 5;
+		}
 	}
 	return _score;
 }
@@ -414,7 +416,7 @@ function renderScoreList() {
     let entry = scoreArray[i];
     if (!entry || entry.length < 3 || typeof entry[1] !== "number") continue; // 不正データをスキップ
 
-    let _judge = entry[1] >= 90 ? "✅" : "❌";
+    let _judge = entry[1] >= 60 ? "✅" : "❌";
     _element.innerHTML += `
       ${_judge}\t${entry[0]}\t${entry[1]}点\t${entry[2]}秒\t
       <input type="button" value="🔁" onclick="applyQuestion('${entry[0]}')"><br>
